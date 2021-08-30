@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+task:eval(){
+   "$@"
+}
+
+##########################################################
+# Helper Tasks                                           #
+##########################################################
+
+
+# Open the Magento projects frontpage (like http://web.KEY.t23dev/),
+# the administration (like http://web.KEY.t23dev/admin/) or
+# PHPmyadmin (like http://phpmyadmin.KEY.t23dev/)
+#
+# Allowed parameters: [-home|-h] Frontpage (default), [-admin|-a] Administration, [-phpmyadmin|-pma|-p] PHPmyadmin
+# Can be used to open more than one page at the same time.
+task:mopen() {
+    if [ -z "${1:-}" ]
+    then
+        echo "Opening home: \"http://web.${CONFIG_project_key}.t23dev/\" ..."
+        open "http://web.${CONFIG_project_key}.t23dev/"
+
+        return 0;
+    elif [[ "${1:-}" =~ ^(-all|-a)$ ]]
+    then
+        echo "Opening all: " &&
+        echo "\"http://web.${CONFIG_project_key}.t23dev/\""
+        echo "\"http://web.${CONFIG_project_key}.t23dev/admin/\""
+        echo "\"http://phpmyadmin.${CONFIG_project_key}.t23dev/\" ..."
+        open "http://web.${CONFIG_project_key}.t23dev/"
+        open "http://web.${CONFIG_project_key}.t23dev/admin/"
+        open "http://phpmyadmin.${CONFIG_project_key}.t23dev/"
+
+        return 0;
+    fi
+
+    for PARAMS in $@
+    do
+        case "${PARAMS}" in
+            -home|-h)
+                echo "Opening home: \"http://web.${CONFIG_project_key}.t23dev/\" ..."
+                open "http://web.${CONFIG_project_key}.t23dev/"
+                ;;
+            -admin|-am)
+                echo "Opening admin: \"http://web.${CONFIG_project_key}.t23dev/admin/\" ..."
+                open "http://web.${CONFIG_project_key}.t23dev/admin/"
+                ;;
+            -phpmyadmin|-pma|-p)
+                echo "Opening phpmyadmin: \"http://phpmyadmin.${CONFIG_project_key}.t23dev/\" ..."
+                open "http://phpmyadmin.${CONFIG_project_key}.t23dev/"
+                ;;
+        esac
+    done
+}
+
+task:show() {
+    OPENER='open'
+    [ "$(uname -s)" = "Linux" ] && OPENER='xdg-open'
+
+    if [[ $# -eq 0 ]] ; then
+	    $OPENER "http://web.$CONFIG_project_key.t23dev/"
+    else
+    	if [[ $1 == /* ]] ; then
+    		$OPENER "http://web.$CONFIG_project_key.t23dev$1"
+    	else
+    		$OPENER "http://$1.$CONFIG_project_key.t23dev/"
+    	fi
+    fi
+}
