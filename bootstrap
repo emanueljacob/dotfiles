@@ -17,7 +17,7 @@ echo '   ~/.vimrc will be overridden and symlinked'
 echo '   ~/.b5/Taskfile will be overridden and symlinked'
 echo '   a new global-gitignore will be set in the git configuration'
 echo '   brew will be (re)installed and used for services (current cellar will be deleted)'
-echo '   php, pytho, services etc will be installed (& started) via brew'
+echo '   php, python, services etc will be installed (& started) via brew'
 echo '   tools & packages (macOs apps, cli tools, composer, npm) will be installed and configured'
 echo 'Are you sure you want to to this? (y/n) '
 read -p 'Answer: '  reply

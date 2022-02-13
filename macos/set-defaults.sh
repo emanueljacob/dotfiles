@@ -11,9 +11,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # General UI/UX                                                               #
 ###############################################################################
 
-# Disable the sound effects on boot
-#sudo nvram SystemAudioVolume=" "
-
 # Menu bar: disable transparency
 #defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
@@ -162,11 +159,11 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Screenshots                                                                 #
 ###############################################################################
 
-# Set default screenshot location
-#defaults write com.apple.screencapture "location" -string "~/Documents/Screenshots"
+# Set default screenshot location (only works if directory exists...)
+defaults write com.apple.screencapture "location" -string "~/Documents/Screenshots"
 
 # Exclude date and time in screenshot filenames
-defaults write com.apple.screencapture "include-date" -bool false
+defaults write com.apple.screencapture "include-date" -bool true
 
 # Change the default screenshot file name
 defaults write com.apple.screencapture "name" -string "screenshot"
@@ -180,14 +177,6 @@ defaults write com.apple.dock no-bouncing -bool true
 
 # Set the icon size of Dock items to 72 pixels
 defaults write com.apple.dock tilesize -int 72
-
-# Hide indicator lights for open applications in the Dock
-#defaults write com.apple.dock show-process-indicators -bool false
-
-# Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
-# the Dock to launch apps.
-#defaults write com.apple.dock persistent-apps -array ""
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
