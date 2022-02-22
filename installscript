@@ -63,7 +63,6 @@ echo 'Install zsh-completions'
 echo '---------------------------'
 git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
 
-
 echo 'Install pkg-config'
 echo '------------------'
 brew install pkg-config
@@ -91,6 +90,10 @@ brew install ack
 echo 'Install rsync'
 echo '-----------'
 brew install rsync
+
+echo 'Install bat'
+echo '------------'
+brew install bat
 
 echo 'Install nice quicklook plugins'
 echo '-----------------------------------'
