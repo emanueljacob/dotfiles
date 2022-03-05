@@ -11,6 +11,16 @@ alias hostfile="sudo vi /etc/hosts"
 alias sshconfig="vi ~/.ssh/config"
 alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
 
+# PHP version switching
+alias php73="phpv php@7.3"
+alias php74="phpv php@7.4"
+alias php80="phpv php@8.0"
+alias php81="phpv php@8.1"
+alias phpv73="phpv valet-php@7.3"
+alias phpv74="phpv valet-php@7.4"
+alias phpv80="phpv valet-php@8.0"
+alias phpv81="phpv valet-php@8.1"
+
 # Mac conveniences for Linux (not needed on macos)
 # alias pbcopy='xclip -selection clipboard'
 # alias pbpaste='xclip -selection clipboard -o'
@@ -28,10 +38,6 @@ alias o="open ."
 # List all files colorized in long format
 alias l="ls -laF"
 alias ll="ls -la"
-
-# PHP
-alias switch-php80="brew unlink php@7.4 && brew link --overwrite --force php"
-alias switch-php74="brew unlink php && brew link --overwrite --force php@7.4"
 
 # VSCode
 alias vscode='open -a "/Applications/Visual Studio Code.app" "`pwd`"'

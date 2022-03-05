@@ -94,9 +94,13 @@ function switchenvironment() {
 }
 
 function phpv() {
-    valet stop
-    brew unlink php@7.4 php@8.0 valet-php@7.3 valet-php@7.4 valet-php@8.0
+    brew unlink php@7.3 php@7.4 php@8.0 php@8.1 valet-php@7.3 valet-php@7.4 valet-php@8.0 valet-php@8.1
     brew link --force --overwrite $1
+}
+
+function phpv-valet() {
+    valet stop
+    phpv $1
     #brew services start $1
     #composer global update
 	  #rm -f ~/.config/valet/valet.sock
@@ -116,11 +120,4 @@ function apachestatus() {
       echo " ${line}"
   done
 }
-
-alias php74="phpv php@7.4"
-alias php80="phpv php@8.0"
-alias phpv73="phpv valet-php@7.3"
-alias phpv74="phpv valet-php@7.4"
-alias phpv80="phpv valet-php@8.0"
-
 function
