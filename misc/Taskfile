@@ -68,3 +68,14 @@ task:show() {
     	fi
     fi
 }
+
+
+task:traefik-toggle() {
+    if $(docker ps | grep -q "traefik:" || return 1); then
+        echo "b5-traefik already running: Stopping..."
+        b5 -q -t ~/Infrastructure/b5-traefik/build/Taskfile -r ~/Infrastructure/b5-traefik/build/ halt
+    else
+        echo "b5-traefik not running: Starting..."
+        b5 -q -t ~/Infrastructure/b5-traefik/build/Taskfile -r ~/Infrastructure/b5-traefik/build/ run -d
+    fi
+}
