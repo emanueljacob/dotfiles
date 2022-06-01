@@ -95,20 +95,20 @@ echo 'Install bat'
 echo '------------'
 brew install bat
 
-echo 'Install nice quicklook plugins'
-echo '-----------------------------------'
-brew install --cask --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webp-quicklook suspicious-package
+#echo 'Install nice quicklook plugins'
+#echo '-----------------------------------'
+#brew install --cask --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webp-quicklook suspicious-package
 
 echo 'Install php (7.4, 8.0)'
 echo '-----------'
 brew install php@7.4
 brew install php@8.0
 
-echo'Install valet-php (7.4, 8.0)'
-echo '-----------'
-brew install valet-php@7.3 --build-from-source
-brew install valet-php@7.4 --build-from-source
-brew install valet-php@8.0 --build-from-source
+#echo'Install valet-php (7.4, 8.0)'
+#echo '-----------'
+#brew install valet-php@7.3 --build-from-source
+#brew install valet-php@7.4 --build-from-source
+#brew install valet-php@8.0 --build-from-source
 
 echo 'Install composer'
 echo '----------------'
@@ -126,14 +126,19 @@ rm composer-setup.php
 sudo mv composer.phar /usr/local/bin/composer
 
 
-echo 'Install laravel valet plus (with domain vspdev)'
+#echo 'Install laravel valet plus (with domain vspdev)'
+#echo '---------------------'
+#brew tap henkrehorst/homebrew-php
+#composer global require weprovide/valet-plus
+#valet install
+#valet domain vspdev # or whatever you like of course
+#valet install mysql
+#valet install elasticsearch
+
+echo 'Install laravel valet'
 echo '---------------------'
-brew tap henkrehorst/homebrew-php
-composer global require weprovide/valet-plus
+composer global require laravel/valet
 valet install
-valet domain vspdev # or whatever you like of course
-valet install mysql
-valet install elasticsearch
 
 echo 'Install mackup'
 echo '--------------'
