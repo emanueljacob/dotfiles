@@ -187,9 +187,10 @@ echo '-----------'
 brew tap team23/b5 https://git.team23.de/build/homebrew-b5.git
 brew install b5
 
-echo 'Install macOS apps (alfred, spectacle, sublime-text, table-plus, docker, tunnelblick, vscode)'
-echo '-----------------------------------'
-brew install --cask spectacle sublime-text iterm2 tableplus alfred insomnia tunnelblick visual-studio-code
+echo 'Install macOS apps (alfred, spectacle, sublime-text, table-plus, docker, tunnelblick, vscode, phpmonitor)'
+echo '-------------'
+brew tap nicoverbruggen/homebrew-cask # for phpmon
+brew install --cask spectacle sublime-text iterm2 tableplus alfred insomnia tunnelblick visual-studio-code phpmon
 brew install docker
 
 echo '++++++++++++++++++++++++++++++'
