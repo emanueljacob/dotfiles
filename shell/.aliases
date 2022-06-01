@@ -9,7 +9,7 @@ alias ci="composer install"
 alias cda="composer dump-autoload -o"
 alias hostfile="sudo vi /etc/hosts"
 alias sshconfig="vi ~/.ssh/config"
-alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
+alias copykey='command cat ~/.ssh/id_rsa.pub | pbcopy'
 
 # PHP version switching
 alias php73="phpv php@7.3"
