@@ -84,10 +84,10 @@ export PATH=$HOME/.dotfiles/bin:$PATH
 #export XDEBUG_CONFIG="idekey=PHPSTORM"
 
 # oh-my-zsh syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
 # oh-my-zsh autosuggest
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Extra paths
 export PATH="$HOME/.composer/vendor/bin:$PATH"
