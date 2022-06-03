@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+. "$HOME/.fig/shell/zshrc.pre.zsh"
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -85,7 +87,7 @@ export PATH=$HOME/.dotfiles/bin:$PATH
 
 # in case its a non m1 mac
 if [ -z "$HOMEBREW_PREFIX" ]; then
-  HOMEBREW_PREFIX = '/usr/local'
+  HOMEBREW_PREFIX='/usr/local'
 fi
 
 # oh-my-zsh syntax highlighting
@@ -112,3 +114,6 @@ export PATH="$HOME/.symfony/bin:$PATH"
 
 # vagrant docker host
 #export DOCKER_HOST=tcp://127.0.0.1:2375
+
+# Fig post block. Keep at the bottom of this file.
+. "$HOME/.fig/shell/zshrc.post.zsh"
