@@ -125,12 +125,11 @@ function apachestatus() {
 function mamp() {
   SCRIPT_PATH="/Applications/MAMP/bin/"
   if [ -z "$1" ]; then
-    echo -e "Please provide a script to run.\\n\\nAvailable scripts:"
-    #find $SCRIPT_PATH -type f -name "*.sh"
+    echo -en "Please provide a script to run.\\n\\nAvailable scripts:"
     (
       cd $SCRIPT_PATH \
       && echo -e "\033[0;34m" \
-      && ls -1 *.sh | sed 's/\.[^.]*$//' | read name; echo -e "  $name\033[0m"
+      && ls -1 *.sh | sed 's/\.[^.]*$//' | sed -E 's/(.*)/  \1/' && echo -en "\033[0m"
     )
     return 1
   fi
