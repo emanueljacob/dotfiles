@@ -83,6 +83,11 @@ export PATH=$HOME/.dotfiles/bin:$PATH
 # Setup xdebug
 #export XDEBUG_CONFIG="idekey=PHPSTORM"
 
+# in case its a non m1 mac
+if [ -z "$HOMEBREW_PREFIX" ]; then
+  HOMEBREW_PREFIX = '/usr/local'
+fi
+
 # oh-my-zsh syntax highlighting
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
