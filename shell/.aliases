@@ -42,6 +42,9 @@ alias ll="ls -la"
 # VSCode
 alias vscode='open -a "/Applications/Visual Studio Code.app" "`pwd`"'
 
+# Sublime
+alias sub='open -a "/Applications/Sublime Text.app"'
+
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
