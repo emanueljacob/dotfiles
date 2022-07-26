@@ -1,5 +1,7 @@
 # Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
+
+# Path to dotfiles.
+export DOTFILES=$HOME/.dotfiles
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -17,7 +19,13 @@ DEFAULT_USER=`whoami`
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git composer macos vagrant)
+plugins=(
+    #composer
+    #vagrant
+    #macos
+    git
+    artisan
+)
 
 source $ZSH/oh-my-zsh.sh
 
