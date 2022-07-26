@@ -1,5 +1,4 @@
 # PHP
-alias artisan="php artisan"
 alias pest="vendor/bin/pest"
 alias phpunit="vendor/bin/phpunit"
 alias c="composer"
@@ -71,3 +70,30 @@ alias scrape="scrapeUrl"
 
 # Switch NPM
 alias npmnpm="npm config set registry https://registry.npmjs.org"
+
+# zshrc config reload
+alias reload="source ~/.zshrc"
+
+# laravel specific
+alias artisan="php artisan"
+alias a="php artisan"
+alias fresh="php artisan migrate:fresh --seed"
+alias tinker="php artisan tinker"
+alias seed="php artisan db:seed"
+
+# b5 alias
+# more generic
+alias br="b5 run"
+alias bh="b5 halt"
+
+# more specific
+# magento context
+alias bm="b5 magento"
+alias bmsu="b5 magento setup:upgrade"
+alias bmcf="b5 magento cache:flush"
+alias bmcc="b5 magento cache:clean"
+alias bmcom="b5 magento setup:di:compile"
+alias bf="b5 flush-all"
+
+# php context
+alias bcom="b5 composer"
