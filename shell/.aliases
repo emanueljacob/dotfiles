@@ -74,12 +74,11 @@ alias npmnpm="npm config set registry https://registry.npmjs.org"
 # zshrc config reload
 alias reload="source ~/.zshrc"
 
-# laravel specific
-alias artisan="php artisan"
-alias a="php artisan"
-alias fresh="php artisan migrate:fresh --seed"
-alias tinker="php artisan tinker"
-alias seed="php artisan db:seed"
+# laravel specific (note: zsh-artisan mandatory, otherwise use `php artisan` in alias ...)
+alias a="artisan"
+alias fresh="artisan migrate:fresh --seed"
+alias tinker="artisan tinker"
+alias seed="artisan db:seed"
 
 # b5 alias
 # more generic
