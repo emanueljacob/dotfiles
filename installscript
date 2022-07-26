@@ -67,7 +67,7 @@ echo '---------------------------'
 
 echo 'Install zsh-completions'
 echo '---------------------------'
-git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
+git clone https://github.com/jessarcher/zsh-artisan.git $HOME/.dotfiles/misc/oh-my-zsh-custom/plugins/artisan
 
 echo 'Install pkg-config'
 echo '------------------'
