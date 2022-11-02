@@ -106,6 +106,7 @@ function phpv-valet() {
 	  #rm -f ~/.config/valet/valet.sock
     valet start
 }
+
 function apachestatus() {
   status="$(netstat -at | grep LISTEN | grep *.http)"
   count="$(echo "${status}" | grep -Ev "^$" | wc -l)"
@@ -136,4 +137,52 @@ function mamp() {
   RUN_SCRIPT="$SCRIPT_PATH$1.sh"
   [[ ! -f "$RUN_SCRIPT" ]] && echo "Script does not exist: '$RUN_SCRIPT'" && return 1
   $RUN_SCRIPT ${@:2}
+}
+
+# download files/folders as tar.gz file using rsync
+function down() {
+  local host="$1"
+  local source="${2-./}"
+  source=$( echo "${source}" | sed 's:/\{2,\}$:/:') # reduce multiple trailing slashes to only one
+  local target="${3-${source%/}}"
+  target=$( echo "${target}" | sed 's:/*$:/:') # reduce multiple trailing slashes to only one; always append one slash
+  local exclude=${4:-}
+
+  if [ -z "$host" ]; then
+      echo -e "\033[0;31mPlease provide a ssh host. \033[0m "
+      return 1
+  fi
+
+  # if exclude files are provided:
+  if [ -n "$exclude" ]; then
+    exclude=$(echo "--exclude='${exclude}'" | sed "s/,/' --exclude='/g")
+  fi
+
+  echo -e "\033[0;34mDownloading files on host '${host}' from '${source}', to '${target}'\033[0m"
+
+  # 1. rsync via remote host, and on-the-fly create tar compressed file (via rsync-path trick)
+  #    this way we are able to only login ONCE and also have a progress status
+  #    this will also don't archive symlinks but the files they point to
+  rsync -avzhr --progress --rsync-path="tar $exclude -hzcf "${source}.tar.gz" "${source}" && rsync" -e "ssh -T -c aes128-ctr -o Compression=no -x" "${host}:${source}.tar.gz" "${target}" \
+
+  # 2. cleanup: remove the created tar file from remote host
+  echo -e "\033[0;34mCleanup files on host '${host}' ('${source}.tar.gz')\033[0m"
+  ssh "${host}" -- "rm ${source}.tar.gz"
+}
+
+# pack folder as tar.gz
+function pack () {
+  local source="${1:-./}"
+  source=$( echo "${source}" | sed 's:/\{2,\}$:/:') # reduce multiple trailing slashes to only one
+  local target="${2:-${source%/}}"
+  target=${target%.tar.gz} # remove .tar.gz extension in case it was already provided
+  local exclude=${3:-}
+
+  # if exclude files are provided:
+  if [ -n "$exclude" ]; then
+    exclude=$(echo "--exclude='${exclude}'" | sed "s/,/' --exclude='/g")
+  fi
+
+  echo "Packing '${source}' to '${target}.tar.gz'"
+  eval "tar $exclude -zcf ${target}.tar.gz ${source}"
 }
