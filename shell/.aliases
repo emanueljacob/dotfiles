@@ -80,6 +80,10 @@ alias fresh="artisan migrate:fresh --seed"
 alias tinker="artisan tinker"
 alias seed="artisan db:seed"
 
+# git additions
+# reset permissions using git diff (credits: https://stackoverflow.com/a/4408378/19182397)
+alias git-reset-permissions="git diff -p -R --no-ext-diff --no-color | grep -E '^(diff|(old|new) mode)' --color=never | git apply"
+
 # b5 alias
 # more generic
 alias br="b5 run"
