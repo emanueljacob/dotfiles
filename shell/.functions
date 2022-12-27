@@ -139,6 +139,7 @@ function mamp() {
   $RUN_SCRIPT ${@:2}
 }
 
+<<<<<<< Updated upstream
 # download files/folders as tar.gz file using rsync
 function down() {
   local host="$1"
@@ -186,3 +187,15 @@ function pack () {
   echo "Packing '${source}' to '${target}.tar.gz'"
   eval "tar $exclude -zcf ${target}.tar.gz ${source}"
 }
+=======
+# cd followed by ls shorthand
+function cl() {
+  DIR="$*";
+  # if no DIR given, go home
+  if [ $# -lt 1 ]; then
+          DIR=$HOME;
+  fi;
+  builtin cd "${DIR}" && \
+  ls -la
+}
+>>>>>>> Stashed changes
