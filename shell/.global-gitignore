@@ -37,3 +37,7 @@ yarn-error.log
 .*.marks
 \#*\#
 .~lock.*#
+
+# regular stuff
+_db/
+_temp/
