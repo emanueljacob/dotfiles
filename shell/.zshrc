@@ -89,7 +89,7 @@ export PATH=$HOME/.dotfiles/bin:$PATH
 #ssh-add -A 2>/dev/null;
 
 # Setup xdebug
-#export XDEBUG_CONFIG="idekey=PHPSTORM"
+export XDEBUG_CONFIG="idekey=VSCODE"
 
 # in case its a non m1 mac
 if [ -z "$HOMEBREW_PREFIX" ]; then
@@ -120,3 +120,4 @@ export PATH="$HOME/.symfony/bin:$PATH"
 
 # vagrant docker host
 #export DOCKER_HOST=tcp://127.0.0.1:2375
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

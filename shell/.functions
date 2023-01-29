@@ -28,6 +28,29 @@ function scrapeurl() {
   wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
 }
 
+function xdebug() {
+  iniFileLocation=$(php -i | grep -i "Loaded Configuration File => " | sed 's/^.*=> //')
+  iniAdditionalFilesLocation=$(php -i | grep -i 'dir for additional .ini files => ' | sed 's/^.*=> //')
+
+  # init additional xdebug config file (used by valet)
+  if [[ ! -z "${iniAdditionalFilesLocation}" ]] && [ ! -e "${iniAdditionalFilesLocation}/xdebug.ini" ]; then
+    echo "\033[0;34mNo xdebug config found yet...";
+    echo "Adding default config to additional .ini files dir ('${iniAdditionalFilesLocation}/xdebug.ini')\033[0m";
+    echo "[xdebug]\nxdebug.mode=debug\nxdebug.start_with_request=yes" > "${iniAdditionalFilesLocation}/xdebug.ini"
+  fi
+
+  if [[ $currentLine =~ ^#zend_extension ]]; then
+    sed -i -e 's/^#zend_extension/zend_extension/g' $iniFileLocation
+    echo "xdebug extension setting is now \033[0;32mactive\033[0m";
+  else
+    sed -i -e 's/^zend_extension/#zend_extension/g' $iniFileLocation
+    echo "xdebug extension setting is now \033[0;31minactive\033[0m";
+  fi
+
+  echo "\033[0;34mTrying to restart default php service via valet\033[0m";
+  valet restart php
+}
+
 function db {
   if [ "$1" = "refresh" ]; then
     mysql -uroot -e "drop database $2; create database $2"
