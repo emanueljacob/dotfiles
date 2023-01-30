@@ -31,6 +31,7 @@ function scrapeurl() {
 function xdebug() {
   iniFileLocation=$(php -i | grep -i "Loaded Configuration File => " | sed 's/^.*=> //')
   iniAdditionalFilesLocation=$(php -i | grep -i 'dir for additional .ini files => ' | sed 's/^.*=> //')
+  currentLine=`cat $iniFileLocation | grep xdebug.so`
 
   # init additional xdebug config file (used by valet)
   if [[ ! -z "${iniAdditionalFilesLocation}" ]] && [ ! -e "${iniAdditionalFilesLocation}/xdebug.ini" ]; then
