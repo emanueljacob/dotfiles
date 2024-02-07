@@ -7,6 +7,12 @@ function docker-shell() {
 function mkd() {
   mkdir -p "$@" && cd "$@"
 }
+# writes an nginx config located in misc as an include to the default nginx conf
+# only if valet conf line already exists and only if the conf is not added
+function setNginxConf() {
+  local nginxConfPath='/opt/homebrew/etc/nginx/nginx.conf'
+  grep -qF '.config/valet/Nginx/*' $nginxConfPath && grep -qF "$HOME/.dotfiles/misc/nginx.conf" $nginxConfPath || sed -i '' -e '\|.config/valet/Nginx/*|a\'$'\n    include "'"$HOME"'/.dotfiles/misc/nginx.conf";' $nginxConfPath
+}
 
 # All the dig info
 function digga() {
@@ -26,6 +32,11 @@ alias mysqladm='mysql -u root'
 # Scrape a single webpage with all assets
 function scrapeurl() {
   wget --adjust-extension --convert-links --page-requisites --span-hosts --no-host-directories "$1"
+}
+
+function openHerdIni() {
+  phpversion=$(php -v | grep -Eo '^PHP \d+.\d+' | sed 's/^PHP //' | sed 's/\.//')
+  sub $HOME/Library/Application\ Support/Herd/config/php/$phpversion/php.ini
 }
 
 function xdebug() {
@@ -65,6 +76,18 @@ function db {
     else
         cat "$2" | mysql -uroot "$3"
     fi;
+  elif [ "$1" = "export" ]; then
+   if [ "${3##*.}" = "gz" ]; then
+     mysqldump \
+       --default-character-set=utf8 --set-charset --no-tablespaces --single-transaction --disable-keys --protocol=TCP \
+       -uroot "$2" | gzip \
+       > "$3"
+   else
+     mysqldump \
+       --default-character-set=utf8 --set-charset --no-tablespaces --single-transaction --disable-keys --protocol=TCP \
+       -uroot "$2" \
+       > "$3"
+   fi;
   elif [ "$1" = "list" ]; then
     mysql -uroot -e "show databases" | perl -p -e's/\|| *//g'
   fi
@@ -124,7 +147,7 @@ function switchenvironment() {
 }
 
 function phpv() {
-    brew unlink php@7.3 php@7.4 php@8.0 php@8.1 valet-php@7.3 valet-php@7.4 valet-php@8.0 valet-php@8.1
+    brew unlink php@8.0 php@8.1 php@8.2 php@8.3
     brew link --force --overwrite $1
 }
 
@@ -226,4 +249,29 @@ function cl() {
   fi;
   builtin cd "${DIR}" && \
   ls -la
+}
+
+function yt-soundclip() {
+  local url="${1}"
+  local start="${2}"
+  local end="${3}"
+  local speed="${4}"
+  youtube-dl -xq --audio-format mp3 "${url}" --output "downloadtemp.%(ext)s" && ffmpeg -ss "${start}" -to "${end}" -loglevel quiet -i downloadtemp.mp3 -c copy download.mp3 && rm downloadtemp.mp3
+
+  echo "created soundclip: $(realpath download.mp3)"
+
+  if [ ! -z "$speed" ]; then
+    ffmpeg -loglevel quiet -i download.mp3 -filter:a "atempo=${speed}" "./download-${speed}.mp3"
+    echo "created soundclip with different speed: $(realpath ./download-$speed.mp3)"
+  fi
+}
+
+
+function gloc() {
+  if [ -z "$2" ]; then
+    git log --author="${1:-}" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -
+  else
+    # after in format Y-m-d (i.e. 2016-01-31)
+    git log --author="${1:-}" --after="${2:-}" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -
+  fi
 }

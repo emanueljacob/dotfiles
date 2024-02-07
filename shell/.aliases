@@ -1,6 +1,16 @@
+#general
+alias cat='bat --paging=never'
+alias less='bat'
+
 # PHP
 alias pest="vendor/bin/pest"
 alias phpunit="vendor/bin/phpunit"
+alias pint="vendor/bin/pint"
+alias phpstan="vendor/bin/phpstan --memory-limit=-1"
+alias stan="vendor/bin/phpstan --memory-limit=-1"
+alias php-cs-fixer="vendor/bin/php-cs-fixer"
+alias phpcs="vendor/bin/phpcs"
+
 alias c="composer"
 alias cu="composer update"
 alias cr="composer require"
@@ -30,6 +40,8 @@ alias jest="./node_modules/.bin/jest"
 # Git
 alias nah='git reset --hard;git clean -df'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias ghooksd='find ./.git/hooks/ -maxdepth 1 -type f \( -not -name "*.sample" -a -not -name "\.*" \) | while read f; do mv $f ${f}.disabled; done && echo "hooks disabled"'
+alias ghookse='find ./.git/hooks/ -maxdepth 1 -type f \( -name "*.disabled" -a -not -name "\.*" \) | while read f; do mv $f ${f%.disabled}; done && echo "hooks enabled"'
 
 # Fast open
 alias o="open ."
@@ -71,6 +83,8 @@ alias scrape="scrapeUrl"
 # Switch NPM
 alias npmnpm="npm config set registry https://registry.npmjs.org"
 
+alias pstorm="phpstorm"
+
 # zshrc config reload
 alias reload="source ~/.zshrc"
 
@@ -79,6 +93,10 @@ alias a="artisan"
 alias fresh="artisan migrate:fresh --seed"
 alias tinker="artisan tinker"
 alias seed="artisan db:seed"
+alias insights="artisan insights -n"
+
+alias check="insights; pint --test; stan; "
+alias fix="insights --fix; pint;"
 
 # git additions
 # reset permissions using git diff (credits: https://stackoverflow.com/a/4408378/19182397)
