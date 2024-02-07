@@ -23,6 +23,7 @@ plugins=(
     #macos
     git
     artisan
+    timer
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -89,7 +90,7 @@ export PATH=$HOME/.dotfiles/bin:$PATH
 #ssh-add -A 2>/dev/null;
 
 # Setup xdebug
-export XDEBUG_CONFIG="idekey=VSCODE"
+# export XDEBUG_CONFIG="idekey=VSCODE"
 
 # in case its a non m1 mac
 if [ -z "$HOMEBREW_PREFIX" ]; then
@@ -110,6 +111,7 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+export PATH="/Applications/PhpStorm.app/Contents/MacOS:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm '--no-use speeds it ups a bit'
 
