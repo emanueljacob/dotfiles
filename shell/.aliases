@@ -34,6 +34,7 @@ alias jest="./node_modules/.bin/jest"
 
 # Git
 alias nah='git reset --hard;git clean -df'
+alias uncommit='git reset --soft HEAD~1'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias ghooksd='find ./.git/hooks/ -maxdepth 1 -type f \( -not -name "*.sample" -a -not -name "\.*" \) | while read f; do mv $f ${f}.disabled; done && echo "hooks disabled"'
 alias ghookse='find ./.git/hooks/ -maxdepth 1 -type f \( -name "*.disabled" -a -not -name "\.*" \) | while read f; do mv $f ${f%.disabled}; done && echo "hooks enabled"'
