@@ -21,14 +21,9 @@ alias sshconfig="vi ~/.ssh/config"
 alias copykey='command cat ~/.ssh/id_rsa.pub | pbcopy'
 
 # PHP version switching
-alias php73="phpv php@7.3"
-alias php74="phpv php@7.4"
-alias php80="phpv php@8.0"
 alias php81="phpv php@8.1"
-alias phpv73="phpv valet-php@7.3"
-alias phpv74="phpv valet-php@7.4"
-alias phpv80="phpv valet-php@8.0"
-alias phpv81="phpv valet-php@8.1"
+alias php82="phpv php@8.2"
+alias php83="phpv php@8.3"
 
 # Mac conveniences for Linux (not needed on macos)
 # alias pbcopy='xclip -selection clipboard'

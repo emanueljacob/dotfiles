@@ -147,8 +147,14 @@ function switchenvironment() {
 }
 
 function phpv() {
-    brew unlink php@8.0 php@8.1 php@8.2 php@8.3
-    brew link --force --overwrite $1
+    version="${1%"${1##*[![:space:]]}"}" #trim spaces
+    if ! brew list --formula | grep -iq "^${version}$" ; then
+      echo "PHP version (${version}) is not installed"
+      return 1
+    fi
+
+    brew unlink $(brew list --formula | grep -i 'php@')
+    brew link --force --overwrite $version
 }
 
 function phpv-valet() {
